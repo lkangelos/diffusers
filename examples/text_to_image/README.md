@@ -54,12 +54,12 @@ With `gradient_checkpointing` and `mixed_precision` it should be possible to fin
 **___Note: Change the `resolution` to 768 if you are using the [stable-diffusion-2](https://huggingface.co/stabilityai/stable-diffusion-2) 768x768 model.___**
 <!-- accelerate_snippet_start -->
 ```bash
-export MODEL_NAME="CompVis/stable-diffusion-v1-4"
-export DATASET_NAME="lambdalabs/pokemon-blip-captions"
+export MODEL_NAME="/home/louanqi/checkpoints/stable-diffusion-v1-4"
+export DATASET_NAME="/home/louanqi/data/lambdalabs/pokemon-blip-captions"
 
-accelerate launch --mixed_precision="fp16"  train_text_to_image.py \
-  --pretrained_model_name_or_path=$MODEL_NAME \
-  --dataset_name=$DATASET_NAME \
+nohup accelerate launch --mixed_precision="fp16"  train_text_to_image.py \
+  --pretrained_model_name_or_path="/home/louanqi/pycharm/checkpoints/stable-diffusion-v1-4" \
+  --dataset_name="/home/louanqi/pycharm/data/lambdalabs/pokemon-blip-captions" \
   --use_ema \
   --resolution=512 --center_crop --random_flip \
   --train_batch_size=1 \
@@ -69,7 +69,8 @@ accelerate launch --mixed_precision="fp16"  train_text_to_image.py \
   --learning_rate=1e-05 \
   --max_grad_norm=1 \
   --lr_scheduler="constant" --lr_warmup_steps=0 \
-  --output_dir="sd-pokemon-model" 
+  --output_dir="sd-pokemon-model" \
+  > text_to_image.log 2>&1 &
 ```
 <!-- accelerate_snippet_end -->
 

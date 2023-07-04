@@ -712,10 +712,13 @@ def main():
     # download the dataset.
     if args.dataset_name is not None:
         # Downloading and loading a dataset from the hub.
-        dataset = load_dataset(
+        # dataset = load_dataset(
+        #     args.dataset_name,
+        #     args.dataset_config_name,
+        #     cache_dir=args.cache_dir,
+        # )
+        dataset = datasets.load_from_disk(
             args.dataset_name,
-            args.dataset_config_name,
-            cache_dir=args.cache_dir,
         )
     else:
         data_files = {}

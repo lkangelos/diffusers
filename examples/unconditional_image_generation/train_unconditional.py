@@ -448,11 +448,14 @@ def main(args):
     # In distributed training, the load_dataset function guarantees that only one local process can concurrently
     # download the dataset.
     if args.dataset_name is not None:
-        dataset = load_dataset(
+        # dataset = load_dataset(
+        #     args.dataset_name,
+        #     args.dataset_config_name,
+        #     cache_dir=args.cache_dir,
+        #     split="train",
+        # )
+        dataset = datasets.load_from_disk(
             args.dataset_name,
-            args.dataset_config_name,
-            cache_dir=args.cache_dir,
-            split="train",
         )
     else:
         dataset = load_dataset("imagefolder", data_dir=args.train_data_dir, cache_dir=args.cache_dir, split="train")
